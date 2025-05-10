@@ -11,6 +11,7 @@ import FinancialOverview from "../../components/Dashboard/FinancialOverview";
 
 import {IoMdCard} from "react-icons/io";
 import {LuHandCoins, LuWalletMinimal} from "react-icons/lu";
+import ExpenseTransactions from "../../components/Dashboard/ExpenseTransactions";
 
 const Inicio = () => {
   useUserAuth();
@@ -81,6 +82,11 @@ const Inicio = () => {
             totalBalance={dashboardData?.totalBalance || 0}
             totalIncome={dashboardData?.totalIncome || 0}
             totalExpenses={dashboardData?.totalExpenses || 0}
+          />
+
+          <ExpenseTransactions
+            transactions={dashboardData?.last30DaysExpenses?.transactions || []}
+            onSeeMore={() => navigate("/gastos")}
           />
         </div>
       </div>
