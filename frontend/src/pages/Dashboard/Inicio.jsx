@@ -7,6 +7,7 @@ import {API_PATHS} from "../../utils/apiPaths";
 import InfoCard from "../../components/Cards/InfoCard";
 import {addThousandsSeparator} from "../../utils/helper";
 import RecentTransactions from "../../components/Dashboard/RecentTransactions";
+import FinancialOverview from "../../components/Dashboard/FinancialOverview";
 
 import {IoMdCard} from "react-icons/io";
 import {LuHandCoins, LuWalletMinimal} from "react-icons/lu";
@@ -74,6 +75,12 @@ const Inicio = () => {
           <RecentTransactions
             transactions={dashboardData?.recentTransactions}
             onSeeMore={() => navigate("/gastos")}
+          />
+
+          <FinancialOverview
+            totalBalance={dashboardData?.totalBalance || 0}
+            totalIncome={dashboardData?.totalIncome || 0}
+            totalExpenses={dashboardData?.totalExpenses || 0}
           />
         </div>
       </div>
