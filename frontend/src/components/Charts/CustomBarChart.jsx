@@ -11,7 +11,7 @@ import {
 } from "recharts";
 
 const CustomBarChart = ({data}) => {
-  // Function to alternate color
+  // Function to alternate colors
   const getBarColor = (index) => {
     return index % 2 === 0 ? "#875cf5" : "#cfbefb";
   };
@@ -52,9 +52,9 @@ const CustomBarChart = ({data}) => {
 
           <Bar
             dataKey='amount'
-            fill='#ffb042'
+            fill='#ff8042'
             radius={[10, 10, 0, 0]}
-            activeDot={{r: 0, fill: "yellow"}}
+            activeDot={{r: 8, fill: "yellow"}}
             activeStyle={{fill: "green"}}>
             {data.map((entry, index) => (
               <Cell key={index} fill={getBarColor(index)} />

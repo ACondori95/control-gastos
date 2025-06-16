@@ -3,38 +3,24 @@ import EmojiPickerPopup from "../EmojiPickerPopup";
 import Input from "../Inputs/Input";
 
 const AddExpenseForm = ({onAddExpense}) => {
-  const [income, setIncome] = useState({
+  const [expense, setExpense] = useState({
     category: "",
     amount: "",
     date: "",
     icon: "",
   });
 
-  const handleChange = (key, value) => setIncome({...income, [key]: value});
-
-  const handleDateChange = (raw) => {
-    const digits = raw.replace(/\D/g, "").slice(0, 8);
-    let formatted = digits;
-    if (digits.length > 2) {
-      formatted = `${digits.slice(0, 2)}/${digits.slice(2)}`;
-    }
-    if (digits.length > 4) {
-      formatted = `${digits.slice(0, 2)}/${digits.slice(2, 4)}/${digits.slice(
-        4
-      )}`;
-    }
-    handleChange("date", formatted);
-  };
+  const handleChange = (key, value) => setExpense({...expense, [key]: value});
 
   return (
     <div>
       <EmojiPickerPopup
-        icon={income.icon}
+        icon={expense.icon}
         onSelect={(selectedIcon) => handleChange("icon", selectedIcon)}
       />
 
       <Input
-        value={income.category}
+        value={expense.category}
         onChange={({target}) => handleChange("category", target.value)}
         label='Categoría'
         placeholder='Alquiler, Supermercado, etc'
@@ -42,7 +28,7 @@ const AddExpenseForm = ({onAddExpense}) => {
       />
 
       <Input
-        value={income.amount}
+        value={expense.amount}
         onChange={({target}) => handleChange("amount", target.value)}
         label='Monto'
         placeholder=''
@@ -50,21 +36,19 @@ const AddExpenseForm = ({onAddExpense}) => {
       />
 
       <Input
-        value={income.date}
-        onChange={({target}) => handleDateChange(target.value)}
+        value={expense.date}
+        onChange={({target}) => handleChange("date", target.value)}
         label='Fecha'
-        placeholder='dd/mm/yyyy'
-        type='text'
-        inputMode='numeric'
-        pattern='\d{2}/\d{2}/\d{4}'
+        placeholder=''
+        type='date'
       />
 
       <div className='flex justify-end mt-6'>
         <button
           type='button'
           className='add-btn add-btn-fill'
-          onClick={() => onAddExpense(income)}>
-          Agregar Gasto
+          onClick={() => onAddExpense(expense)}>
+          Añadir Gasto
         </button>
       </div>
     </div>

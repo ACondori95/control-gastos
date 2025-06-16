@@ -5,12 +5,12 @@ import axiosInstance from "../../utils/axiosInstance";
 import {API_PATHS} from "../../utils/apiPaths";
 import Modal from "../../components/Modal";
 import AddIncomeForm from "../../components/Income/AddIncomeForm";
-import {toast} from "react-hot-toast";
+import toast from "react-hot-toast";
 import IncomeList from "../../components/Income/IncomeList";
 import DeleteAlert from "../../components/DeleteAlert";
 import {useUserAuth} from "../../hooks/useUserAuth";
 
-const Ingresos = () => {
+const Income = () => {
   useUserAuth();
 
   const [incomeData, setIncomeData] = useState([]);
@@ -19,7 +19,6 @@ const Ingresos = () => {
     show: false,
     data: null,
   });
-
   const [openAddIncomeModal, setOpenAddIncomeModal] = useState(false);
 
   // Get All Income Details
@@ -29,9 +28,7 @@ const Ingresos = () => {
     setLoading(true);
 
     try {
-      const response = await axiosInstance.get(
-        `${API_PATHS.INCOME.GET_ALL_INCOME}`
-      );
+      const response = await axiosInstance.get(API_PATHS.INCOME.GET_ALL_INCOME);
 
       if (response.data) {
         setIncomeData(response.data);
@@ -98,7 +95,7 @@ const Ingresos = () => {
     }
   };
 
-  // Handle Download Income Details
+  // Handle donwload income details
   const handleDownloadIncomeDetails = async () => {
     try {
       const response = await axiosInstance.get(
@@ -107,7 +104,7 @@ const Ingresos = () => {
       );
 
       // Create a URL for the blob
-      const url = window.URL.createObjectURL(response.data);
+      const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement("a");
       link.href = url;
       link.setAttribute("download", "detalles_ingresos.xlsx");
@@ -152,7 +149,7 @@ const Ingresos = () => {
         <Modal
           isOpen={openAddIncomeModal}
           onClose={() => setOpenAddIncomeModal(false)}
-          title='Agregar Ingreso'>
+          title='Añadir Ingreso'>
           <AddIncomeForm onAddIncome={handleAddIncome} />
         </Modal>
 
@@ -170,4 +167,4 @@ const Ingresos = () => {
   );
 };
 
-export default Ingresos;
+export default Income;

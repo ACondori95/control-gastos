@@ -7,7 +7,7 @@ import axiosInstance from "../../utils/axiosInstance";
 import {API_PATHS} from "../../utils/apiPaths";
 import {UserContext} from "../../context/UserContext";
 
-const Ingresar = () => {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -16,7 +16,7 @@ const Ingresar = () => {
 
   const navigate = useNavigate();
 
-  // Handle Login Form Submit
+  // Handle Login From Submit
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -77,14 +77,14 @@ const Ingresar = () => {
             value={password}
             onChange={({target}) => setPassword(target.value)}
             label='Contraseña'
-            placeholder='Mínimo 8 caracteres'
+            placeholder='Mínimo 8 Carecteres'
             type='password'
           />
 
           {error && <p className='text-red-500 text-xs pb-2.5'>{error}</p>}
 
           <button type='submit' className='btn-primary'>
-            INICIAR SESIÓN
+            INICIÁ SESIÓN
           </button>
 
           <p className='text-[13px] text-slate-800 mt-3'>
@@ -101,4 +101,4 @@ const Ingresar = () => {
   );
 };
 
-export default Ingresar;
+export default Login;

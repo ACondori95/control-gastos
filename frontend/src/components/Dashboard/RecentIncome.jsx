@@ -2,25 +2,6 @@ import React from "react";
 import {LuArrowRight} from "react-icons/lu";
 import TransactionInfoCard from "../Cards/TransactionInfoCard";
 import moment from "moment";
-import "moment/locale/es";
-
-moment.updateLocale("es", {
-  monthsShort: [
-    "Ene",
-    "Feb",
-    "Mar",
-    "Abr",
-    "May",
-    "Jun",
-    "Jul",
-    "Ago",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dic",
-  ],
-});
-moment.locale("es");
 
 const RecentIncome = ({transactions, onSeeMore}) => {
   return (

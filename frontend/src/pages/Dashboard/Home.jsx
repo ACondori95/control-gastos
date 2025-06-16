@@ -7,16 +7,16 @@ import {API_PATHS} from "../../utils/apiPaths";
 import InfoCard from "../../components/Cards/InfoCard";
 import {addThousandsSeparator} from "../../utils/helper";
 import RecentTransactions from "../../components/Dashboard/RecentTransactions";
-import FinancialOverview from "../../components/Dashboard/FinancialOverview";
+import FinanceOverview from "../../components/Dashboard/FinanceOverview";
 import ExpenseTransactions from "../../components/Dashboard/ExpenseTransactions";
 import Last30DaysExpenses from "../../components/Dashboard/Last30DaysExpenses";
 import RecentIncomeWithChart from "../../components/Dashboard/RecentIncomeWithChart";
-import RecentIncome from "../../components/Dashboard/RecentIncome";
 
 import {IoMdCard} from "react-icons/io";
 import {LuHandCoins, LuWalletMinimal} from "react-icons/lu";
+import RecentIncome from "../../components/Dashboard/RecentIncome";
 
-const Inicio = () => {
+const Home = () => {
   useUserAuth();
 
   const navigate = useNavigate();
@@ -30,9 +30,7 @@ const Inicio = () => {
     setLoading(true);
 
     try {
-      const response = await axiosInstance.get(
-        `${API_PATHS.DASHBOARD.GET_DATA}`
-      );
+      const response = await axiosInstance.get(API_PATHS.DASHBOARD.GET_DATA);
 
       if (response.data) {
         setDashboardData(response.data);
@@ -62,14 +60,14 @@ const Inicio = () => {
 
           <InfoCard
             icon={<LuWalletMinimal />}
-            label='Total de Ingresos'
+            label='Ingresos Totales'
             value={addThousandsSeparator(dashboardData?.totalIncome || 0)}
             color='bg-orange-500'
           />
 
           <InfoCard
             icon={<LuHandCoins />}
-            label='Total de Gastos'
+            label='Gastos Totales'
             value={addThousandsSeparator(dashboardData?.totalExpenses || 0)}
             color='bg-red-500'
           />
@@ -81,10 +79,10 @@ const Inicio = () => {
             onSeeMore={() => navigate("/gastos")}
           />
 
-          <FinancialOverview
+          <FinanceOverview
             totalBalance={dashboardData?.totalBalance || 0}
             totalIncome={dashboardData?.totalIncome || 0}
-            totalExpenses={dashboardData?.totalExpenses || 0}
+            totalExpense={dashboardData?.totalExpenses || 0}
           />
 
           <ExpenseTransactions
@@ -113,4 +111,4 @@ const Inicio = () => {
   );
 };
 
-export default Inicio;
+export default Home;

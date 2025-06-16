@@ -10,7 +10,7 @@ import AddExpenseForm from "../../components/Expense/AddExpenseForm";
 import ExpenseList from "../../components/Expense/ExpenseList";
 import DeleteAlert from "../../components/DeleteAlert";
 
-const Gastos = () => {
+const Expense = () => {
   useUserAuth();
 
   const [expenseData, setExpenseData] = useState([]);
@@ -19,7 +19,6 @@ const Gastos = () => {
     show: false,
     data: null,
   });
-
   const [openAddExpenseModal, setOpenAddExpenseModal] = useState(false);
 
   // Get All Expense Details
@@ -30,7 +29,7 @@ const Gastos = () => {
 
     try {
       const response = await axiosInstance.get(
-        `${API_PATHS.EXPENSE.GET_ALL_EXPENSE}`
+        API_PATHS.EXPENSE.GET_ALL_EXPENSE
       );
 
       if (response.data) {
@@ -44,8 +43,8 @@ const Gastos = () => {
   };
 
   // Handle Add Expense
-  const handleAddExpense = async (expense) => {
-    const {category, amount, date, icon} = expense;
+  const handleAddExpense = async (income) => {
+    const {category, amount, date, icon} = income;
 
     // Validation Checks
     if (!category.trim()) {
@@ -76,7 +75,7 @@ const Gastos = () => {
       fetchExpenseDetails();
     } catch (error) {
       console.error(
-        "Error al agregar gasto:",
+        "Error al agregar gasot:",
         error.response?.data?.message || error.message
       );
     }
@@ -98,7 +97,7 @@ const Gastos = () => {
     }
   };
 
-  // Handle Download Expense Details
+  // Handle donwload expense details
   const handleDownloadExpenseDetails = async () => {
     try {
       const response = await axiosInstance.get(
@@ -107,7 +106,7 @@ const Gastos = () => {
       );
 
       // Create a URL for the blob
-      const url = window.URL.createObjectURL(response.data);
+      const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement("a");
       link.href = url;
       link.setAttribute("download", "detalles_gastos.xlsx");
@@ -142,7 +141,9 @@ const Gastos = () => {
 
           <ExpenseList
             transactions={expenseData}
-            onDelete={(id) => setOpenDeleteAlert({show: true, data: id})}
+            onDelete={(id) => {
+              setOpenDeleteAlert({show: true, data: id});
+            }}
             onDownload={handleDownloadExpenseDetails}
           />
         </div>
@@ -150,7 +151,7 @@ const Gastos = () => {
         <Modal
           isOpen={openAddExpenseModal}
           onClose={() => setOpenAddExpenseModal(false)}
-          title='Agregar Gasto'>
+          title='Añadir Gasto'>
           <AddExpenseForm onAddExpense={handleAddExpense} />
         </Modal>
 
@@ -168,4 +169,4 @@ const Gastos = () => {
   );
 };
 
-export default Gastos;
+export default Expense;

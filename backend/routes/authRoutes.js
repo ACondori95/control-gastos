@@ -6,7 +6,6 @@ const {
 } = require("../controllers/authControllers");
 const {protect} = require("../middleware/authMiddleware");
 const upload = require("../middleware/uploadMiddleware");
-const cloudinary = require("../utils/cloudinary");
 
 const router = express.Router();
 
@@ -15,16 +14,11 @@ router.post("/login", loginUser);
 router.get("/getUser", protect, getUserInfo);
 
 router.post("/upload-image", upload.single("image"), (req, res) => {
-  cloudinary.uploader.upload(req.file.path, function (err, result) {
-    if (err) {
-      console.log(err);
-      return res.status(500).json({success: false, message: "Error"});
-    }
+  if (!req.file || !req.file.path) {
+    return res.status(400).json({message: "No se subió ninguna imagen"});
+  }
 
-    res
-      .status(200)
-      .json({success: true, message: "Imagen subida con éxito", data: result});
-  });
+  res.status(200).json({imageUrl: req.file.path});
 });
 
 module.exports = router;

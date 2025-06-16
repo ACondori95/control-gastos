@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const Usuario = require("../models/Usuario");
+const User = require("../models/User");
 
 // Generate JWT token
 const generateToken = (id) => {
@@ -17,7 +17,7 @@ exports.registerUser = async (req, res) => {
 
   try {
     // Check if email already exists
-    const existingUser = await Usuario.findOne({email});
+    const existingUser = await User.findOne({email});
     if (existingUser) {
       return res
         .status(400)
@@ -25,14 +25,12 @@ exports.registerUser = async (req, res) => {
     }
 
     // Create the user
-    const user = await Usuario.create({
+    const user = await User.create({
       fullName,
       email,
       password,
       profileImageUrl,
     });
-
-    console.log("### User created ---> ", user);
 
     res.status(201).json({id: user._id, user, token: generateToken(user._id)});
   } catch (error) {
@@ -49,7 +47,7 @@ exports.loginUser = async (req, res) => {
     return res.status(400).json({message: "Todos los campos son obligatorios"});
   }
   try {
-    const user = await Usuario.findOne({email});
+    const user = await User.findOne({email});
     if (!user || !(await user.comparePassword(password))) {
       return res.status(400).json({message: "Credenciales inválidas"});
     }
@@ -65,7 +63,7 @@ exports.loginUser = async (req, res) => {
 // Get User Info
 exports.getUserInfo = async (req, res) => {
   try {
-    const user = await Usuario.findById(req.user.id).select("-password");
+    const user = await User.findById(req.user.id).select("-password");
 
     if (!user) {
       return res.status(404).json({message: "Usuario no encontrado"});

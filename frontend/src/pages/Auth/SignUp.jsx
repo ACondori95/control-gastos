@@ -9,7 +9,7 @@ import {API_PATHS} from "../../utils/apiPaths";
 import {UserContext} from "../../context/UserContext";
 import uploadImage from "../../utils/uploadImage";
 
-const Registrarse = () => {
+const SignUp = () => {
   const [profilePic, setProfilePic] = useState(null);
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
@@ -48,7 +48,7 @@ const Registrarse = () => {
       // Upload image if present
       if (profilePic) {
         const imgUploadRes = await uploadImage(profilePic);
-        profileImageUrl = imgUploadRes.data.url || "";
+        profileImageUrl = imgUploadRes.imageUrl || "";
       }
 
       const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER, {
@@ -102,12 +102,12 @@ const Registrarse = () => {
               type='text'
             />
 
-            <div className='col-span-2'>
+            <div className='md:col-span-2'>
               <Input
                 value={password}
                 onChange={({target}) => setPassword(target.value)}
                 label='Contraseña'
-                placeholder='Mínimo 8 caracteres'
+                placeholder='Mínimo 8 Carecteres'
                 type='password'
               />
             </div>
@@ -122,7 +122,7 @@ const Registrarse = () => {
           <p className='text-[13px] text-slate-800 mt-3'>
             ¿Ya tenés una cuenta?{" "}
             <Link className='font-medium text-primary underline' to='/ingresar'>
-              Iniciá sesión
+              Iniciá Sesión
             </Link>
           </p>
         </form>
@@ -131,4 +131,4 @@ const Registrarse = () => {
   );
 };
 
-export default Registrarse;
+export default SignUp;

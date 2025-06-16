@@ -5,11 +5,11 @@ import {
   BrowserRouter as Router,
   Routes,
 } from "react-router-dom";
-import Ingresar from "./pages/Auth/Ingresar";
-import Registrarse from "./pages/Auth/Registrarse";
-import Inicio from "./pages/Dashboard/Inicio";
-import Ingresos from "./pages/Dashboard/Ingresos";
-import Gastos from "./pages/Dashboard/Gastos";
+import Login from "./pages/Auth/Login";
+import SignUp from "./pages/Auth/SignUp";
+import Home from "./pages/Dashboard/Home";
+import Income from "./pages/Dashboard/Income";
+import Expense from "./pages/Dashboard/Expense";
 import UserProvider from "./context/UserContext";
 import {Toaster} from "react-hot-toast";
 
@@ -20,11 +20,11 @@ const App = () => {
         <Router>
           <Routes>
             <Route path='/' element={<Root />} />
-            <Route path='/ingresar' exact element={<Ingresar />} />
-            <Route path='/registrarse' exact element={<Registrarse />} />
-            <Route path='/inicio' exact element={<Inicio />} />
-            <Route path='/ingresos' exact element={<Ingresos />} />
-            <Route path='/gastos' exact element={<Gastos />} />
+            <Route path='/ingresar' exact element={<Login />} />
+            <Route path='/registrarse' exact element={<SignUp />} />
+            <Route path='/inicio' exact element={<Home />} />
+            <Route path='/ingresos' exact element={<Income />} />
+            <Route path='/gastos' exact element={<Expense />} />
           </Routes>
         </Router>
       </div>

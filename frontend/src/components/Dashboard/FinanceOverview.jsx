@@ -3,11 +3,11 @@ import CustomPieChart from "../Charts/CustomPieChart";
 
 const COLORS = ["#875cf5", "#fa2c37", "#ff6900"];
 
-const FinancialOverview = ({totalBalance, totalIncome, totalExpenses}) => {
+const FinanceOverview = ({totalBalance, totalIncome, totalExpense}) => {
   const balanceData = [
     {name: "Balance Total", amount: totalBalance},
-    {name: "Total de Gastos", amount: totalExpenses},
-    {name: "Total de Ingresos", amount: totalIncome},
+    {name: "Gastos Totales", amount: totalExpense},
+    {name: "Ingresos Totales", amount: totalIncome},
   ];
 
   return (
@@ -27,4 +27,4 @@ const FinancialOverview = ({totalBalance, totalIncome, totalExpenses}) => {
   );
 };
 
-export default FinancialOverview;
+export default FinanceOverview;

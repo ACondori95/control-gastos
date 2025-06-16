@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const GastoSchema = new mongoose.Schema(
+const ExpenseSchema = new mongoose.Schema(
   {
     userId: {
       type: mongoose.Schema.Types.ObjectId,
@@ -8,11 +8,11 @@ const GastoSchema = new mongoose.Schema(
       required: true,
     },
     icon: {type: String},
-    category: {type: String, required: true}, // Example: Salary, Freelance, etc.
+    category: {type: String, required: true}, // Example: Food, Rent, Groceries
     amount: {type: Number, required: true},
     date: {type: Date, default: Date.now},
   },
   {timestamps: true}
 );
 
-module.exports = mongoose.model("Gasto", GastoSchema);
+module.exports = mongoose.model("Gasto", ExpenseSchema);

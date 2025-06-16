@@ -32,7 +32,7 @@ axiosInstance.interceptors.response.use(
       if (error.response.status === 401) {
         // Redirect to login page
         window.location.href = "/ingresar";
-      } else if (error.response.staus === 500) {
+      } else if (error.response.status === 500) {
         console.error(
           "Error del servidor. Por favor, intentá de nuevo más tarde."
         );
